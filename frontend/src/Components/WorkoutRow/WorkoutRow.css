@@ -1,0 +1,26 @@
+.workoutRow {
+  padding: 2rem 2rem;
+  background-color: white;
+  position: relative;
+}
+
+.workoutRow h4 {
+  color: rgb(47, 211, 170);
+  font-size: 1.25em;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.workoutRow p {
+  margin: 0;
+  margin-top: 0.25rem;
+}
+.workoutRow span {
+  color: red;
+  position: absolute;
+  bottom: 10%;
+  right: 3%;
+}
+.workoutRow span:hover {
+  cursor: pointer;
+}

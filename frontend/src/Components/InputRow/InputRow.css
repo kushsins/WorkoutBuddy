@@ -1,0 +1,13 @@
+.inputRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.inputRow h4 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.input{
+  padding: 0.5rem;
+}
