@@ -25,12 +25,33 @@ const getWorkout = async (req, res) => {
 const createWorkout = async (req, res) => {
   const { title, reps, load } = req.body;
 
+  const exercise = await Workout.alreadyExists(title);
   //add doc to db
-  try {
-    const workout = await Workout.create({ title, reps, load });
+  if (exercise) {
+    const { id } = exercise;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such workout exists" });
+    }
+    const workout = await Workout.findOneAndUpdate(
+      { _id: id },
+      {
+        ...req.body,
+      }
+    );
+
+    if (!workout) {
+      return req.status(400).json({ error: "No such workout exists" });
+    }
     res.status(200).json(workout);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } else {
+    console.log("no such work out exists");
+    try {
+      const workout = await Workout.create({ title, reps, load });
+      res.status(200).json(workout);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   }
 };
 

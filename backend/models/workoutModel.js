@@ -20,4 +20,13 @@ const workoutSchema = new Schema(
   { timestamps: true }
 );
 
+workoutSchema.statics.alreadyExists = async function (title) {
+  try {
+    const exercise = await this.findOne({ title });
+    if (exercise) return exercise;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 module.exports = mongoose.model("Workout", workoutSchema);
